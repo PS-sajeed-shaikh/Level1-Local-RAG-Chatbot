@@ -1,0 +1,10 @@
+.env
+.pytest_cache/
+.streamlit/
+__pycache__/
+*.py[cod]
+*.sqlite3
+chroma_db/
+dataset/data.txt
+venv/
+.venv/
