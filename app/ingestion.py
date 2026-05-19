@@ -47,10 +47,10 @@ def main() -> None:
     splitter = build_text_splitter(settings)
     chunked_documents = splitter.split_documents(source_documents)
 
+    embeddings = build_embeddings(settings)
     if settings.vector_db_path.exists():
         shutil.rmtree(settings.vector_db_path)
 
-    embeddings = build_embeddings(settings)
     vector_store = build_vector_store(settings, embeddings)
 
     ids = [str(uuid4()) for _ in chunked_documents]

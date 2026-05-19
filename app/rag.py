@@ -16,7 +16,15 @@ def build_embeddings(settings: Settings) -> OllamaEmbeddings:
     return OllamaEmbeddings(model=settings.embedding_model)
 
 
-def build_vector_store(settings: Settings, embeddings: OllamaEmbeddings) -> Chroma:
+def build_vector_store(
+    settings: Settings, embeddings: OllamaEmbeddings | None
+) -> Chroma:
+    if embeddings is None:
+        raise ValueError(
+            "Embeddings are required to build the vector store. "
+            "Verify the embedding model configuration before continuing."
+        )
+
     return Chroma(
         collection_name=settings.vector_db_collection,
         embedding_function=embeddings,
